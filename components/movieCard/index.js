@@ -37,6 +37,12 @@ class MovieCard extends HTMLElement {
         'title'
       );
       this.shadowRoot.querySelector('img').src = this.getAttribute('poster');
+      this.shadowRoot
+        .querySelector('.button')
+        .setAttribute(
+          'href',
+          `https://imdb.com/title/${this.getAttribute('imdbID')}`
+        );
       if (this.getAttribute('isFavourite') == 'true') {
         this.isFavourite = true;
         this.shadowRoot
@@ -66,7 +72,9 @@ class MovieCard extends HTMLElement {
   }
 
   disconnectedCallback() {
-    this.shadowRoot.querySelector('.isFavourite').removeEventListener('click');
+    this.shadowRoot
+      .querySelector('.isFavourite')
+      .removeEventListener('click', () => this.favToggle());
   }
 }
 
